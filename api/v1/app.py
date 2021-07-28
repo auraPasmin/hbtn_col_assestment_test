@@ -1,20 +1,18 @@
 #!/usr/bin/python3
 """flask server"""
 from flask import Flask, jsonify
+from api.v1.models import db
 from api.v1.routes import app_routes
-from api.v1.models import *
-from flask_sqlalchemy import SQLAlchemy
+
 
 
 
 app = Flask(__name__)
 
+
+db.init_app(app)
 app.register_blueprint(app_routes)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'
-app.config['SECRET_KEY'] = "random string"
-db = SQLAlchemy(app)
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:amps3300@localhost/proyect_db'
 
 
 
