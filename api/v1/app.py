@@ -14,9 +14,12 @@ app.include_router(login.router, tags=["login"])
 app.include_router(users.router, prefix="/users", tags=["users"])
 app.include_router(posts.router, prefix="/posts", tags=["posts"])
 
-db.init_app(app)
-app.register_blueprint(app_routes)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:amps3300@localhost/proyect_db'
+cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+app.register_blueprint(app_views)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:amps3300@localhost/orders'
+
+mysql = MySQL(app)
 
 @app.get("/")
 async def index():
