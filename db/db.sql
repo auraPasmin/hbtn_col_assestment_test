@@ -1,10 +1,8 @@
-CREATE DATABASE IF NOT EXISTS proyect_db;
-CREATE USER IF NOT EXISTS 'proyect_user'@'localhost' IDENTIFIED BY 'proyect_user_pass@';
-GRANT ALL PRIVILEGES ON proyect_db.* TO 'proyect_user'@'localhost';
-GRANT SELECT ON performance_schema.* TO 'proyect_user'@'localhost';
-FLUSH PRIVILEGES;
+-- Database name
+CREATE DATABASE orders;
 
-CREATE TABLE order(
-order_id INT NOT NULL AUTO_INCREMENT,
-PRIMARY KEY (order_id )
-);
+-- User
+CREATE USER 'hbtn_orders'@'localhost' IDENTIFIED BY '12345678';
+CREATE USER 'hbtn_orders'@'%' IDENTIFIED BY '12345678';
+GRANT ALL PRIVILEGES ON *.* TO 'hbtn_orders'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'hbtn_orders'@'%';

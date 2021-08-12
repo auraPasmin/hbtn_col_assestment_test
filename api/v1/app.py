@@ -2,9 +2,9 @@
 """flask server"""
 from api.v1.views import login, posts, users
 from flask import Flask, jsonify, make_response
-from api.v1.models import db
-from api.v1.routes import app_routes
-
+from flask_cors import CORS
+from flask_mysqldb import MySQL
+from os import environ
 
 
 
@@ -17,6 +17,10 @@ app.include_router(posts.router, prefix="/posts", tags=["posts"])
 db.init_app(app)
 app.register_blueprint(app_routes)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:amps3300@localhost/proyect_db'
+
+@app.get("/")
+async def index():
+    return {'message': 'active'}
 
 @app.errorhandler(404)
 def not_found(error):
